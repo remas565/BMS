@@ -38,4 +38,29 @@ create_account() {
     read amount
 
     echo "Account created successfully."
+}# Function to deposit money into an account
+deposit() {
+    echo "Enter amount to deposit: "
+    read d
+    amount=$(echo "$amount + $d" | bc)
+    echo "Updated. New amount: $amount"
+}
+
+# Function to withdraw money from an account
+withdraw() {
+    echo "Enter amount to withdraw: "
+    read wd
+    if [[ $(echo "$wd <= $amount" | bc) -eq 1 ]]; then
+        amount=$(echo "$amount - $wd" | bc)
+        echo "Amount withdrawn. Remaining amount: $amount"
+    else
+        echo "You don't have enough money in the account."
+    fi
+}
+
+# Function to display account details
+check_account() {
+    echo "Name: $name"
+    echo "Address: $address"
+    echo "Amount: $amount"
 }
