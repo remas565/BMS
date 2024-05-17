@@ -63,4 +63,4 @@ check_account() {
     echo "Name: $name"
     echo "Address: $address"
     echo "Amount: $amount"
-}
+}echo "asal"
