@@ -69,3 +69,60 @@ deposit() {
     echo "Updated. New amount: $amount"
     sleep 4
 }
+# Function to display account details
+check_account() {
+    echo "Name: $name"
+    echo "Address: $address"
+    echo "Amount: $amount"
+    echo "Months: $month"
+    sleep 4
+}
+
+# Function to sign in
+sign_in() {
+   echo "Enter your username: "
+    read input_username
+    echo "Enter your password: "
+    read input_password
+    echo "Checking credentials..."
+
+    # Create a pattern of username,password
+    pattern="$input_username,$input_password"
+
+    # Use grep to search for the pattern in the 'user_credentials.txt' file
+    if grep -q "$pattern" user_credentials.txt; then
+        echo "Sign in successful. Welcome back, $input_username!"
+        signed_in_menu  # Call the signed-in menu here
+    else
+        echo "Invalid username or password."
+    fi
+}
+
+Feedback(){
+     echo "Are you happy with our system? "
+     while true; do
+        clear
+        echo "============= Feedback ============="
+        echo "1. Happy :)"
+        echo "2. Sad :("
+        echo "========================================"
+        echo "Enter choice no: "
+        read choice
+        
+        case $choice in
+            1) 
+               echo "Thank you for your feedback. Exiting..."
+               sleep 4
+               return
+               ;;
+            2) 
+               echo "We're sorry to hear that. We'll strive to improve. Exiting..."
+               sleep 4
+               return
+               ;;
+            *) 
+                echo "Invalid choice. Please try again."
+                ;;
+        esac
+    done
+}
