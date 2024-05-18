@@ -2,65 +2,70 @@
 
 # Function to initialize account attributes
 initialize_account() {
-    accno=0
-    name=""
-    address=""
-    amount=0.0
+    local accno=0
+    local name=""
+    local address=""
+    local amount=0.0
+    local month=1
+    local username=""
+    local password=""
+    local feedback=1
 }
 
 # Function to check if the account slot is available
 check_availability() {
-    if [[ $accno -eq 0 && -z $name && -z $address && -z $actype && $amount -eq 0.0 ]]; then
+    if [[ $accno -eq 0 && -z $name && -z $address && -z $month && $amount -eq 0.0 ]]; then
         return 0
     else
         return 1
     fi
 }
 
-# Function to create a new account
 create_account() {
-    echo "Your account number: "
+    echo "Enter your full name: "
+    read name
+    echo "You entered: $name"
+    
+    echo "Enter your address: "
+    read address
+    echo "You entered: $address"
+    
+    echo "Enter how much money you want to deposit: "
+    read amount
+    echo "You entered: $amount"
+    
+    echo "For how many month do you want to save your money: (write the number of months do you want)"
+    read month
+    
+    # Generate a unique account number
     account_number=$((RANDOM + 1000000000))
     echo "Your account is being created..."
-
-    sleep 2
+    sleep 1
 
     echo "Congratulations, $name! Your bank account has been created."
     echo "Account Number: $account_number"
+    sleep 1
+    
+    echo "Enter your username: "
+    read username
+    sleep 1
+    
+    echo "Enter your password: "
+    read password 
+    sleep 1
+   
+    echo "$username,$password" >> user_credentials.txt
+    sleep 1
+    
+    # Force output to appear immediately
+    echo  "\n Account created successfully."
+}
 
-    echo "Enter your full name: "
-    read name
-
-    echo "Enter your address: "
-    read address
-
-    echo "Enter how much money you want to deposit: "
-    read amount
-
-    echo "Account created successfully."
-}# Function to deposit money into an account
+# Function to deposit money into an account
 deposit() {
     echo "Enter amount to deposit: "
     read d
     amount=$(echo "$amount + $d" | bc)
     echo "Updated. New amount: $amount"
+    sleep 4
 }
-
-# Function to withdraw money from an account
-withdraw() {
-    echo "Enter amount to withdraw: "
-    read wd
-    if [[ $(echo "$wd <= $amount" | bc) -eq 1 ]]; then
-        amount=$(echo "$amount - $wd" | bc)
-        echo "Amount withdrawn. Remaining amount: $amount"
-    else
-        echo "You don't have enough money in the account."
-    fi
-}
-
-# Function to display account details
-check_account() {
-    echo "Name: $name"
-    echo "Address: $address"
-    echo "Amount: $amount"
-}echo "asal"
