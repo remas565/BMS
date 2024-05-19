@@ -126,3 +126,69 @@ Feedback(){
         esac
     done
 }
+signed_in_menu() {
+    while true; do
+        clear
+        echo "============= Account Menu ============="
+        echo "1. Check account"
+        echo "2. Deposit"
+        echo "3. Sign out"
+        echo "========================================"
+        echo "Enter choice no: "
+        read choice
+        
+        case $choice in
+            1) 
+                check_account
+                ;;
+            2) 
+                deposit
+                ;;
+                
+            3) 
+                echo "Signing out..."
+                return
+                ;;
+            *) 
+                echo "Invalid choice. Please try again."
+                ;;
+        esac
+    done
+}
+# Main function
+main() {
+    initialize_account
+    while true; do
+        clear
+        echo "============= Bank Menu ============="
+        echo "1. Create a new account"
+        echo "2. Sign in"
+        echo "3. feedback"
+        echo "4. Exit"
+        echo "===================================="
+        echo "Enter choice no: "
+        read choice
+        
+        case $choice in
+            1)    echo "NOTE: If you deposit your money into the account, you won't be able to withdraw it until the end of the specified number of months."
+                create_account
+             
+                ;;
+            2) 
+                sign_in
+                ;;
+            3) 
+                Feedback
+                ;;
+                
+            4) exit
+               ;;
+               
+            *) 
+                echo "Invalid choice. Please try again."
+                ;;
+        esac
+    read -n 1 -s -r -p "Press any key to continue..."
+    done
+}
+main
